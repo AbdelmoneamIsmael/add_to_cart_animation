@@ -7,10 +7,11 @@ class AddToCartIcon extends StatefulWidget {
   final GlobalKey<CartIconKey> key;
   final Widget icon;
   final BadgeOptions badgeOptions;
-
+ final String? initial;
   const AddToCartIcon({
     required this.key,
     required this.icon,
+     this.initial,
     this.badgeOptions = const BadgeOptions(),
   }) : super(key: key);
 
@@ -21,7 +22,13 @@ class AddToCartIcon extends StatefulWidget {
 class CartIconKey extends State<AddToCartIcon>
     with SingleTickerProviderStateMixin {
   String _qtdeBadge = "0";
-
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initial != null) {
+      _qtdeBadge = widget.initial!;
+    }
+  }
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 225),
     vsync: this,
